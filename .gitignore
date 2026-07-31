@@ -1,0 +1,50 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript storage
+*.tsbuildinfo
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Build & Output directories
+dist/
+dist-ssr/
+*.local
+
+# Editor directories and files
+.idea/
+.vscode/*
+.agents/
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Large media assets
+public/hero-bg.mp4
+
