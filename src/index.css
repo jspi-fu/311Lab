@@ -63,3 +63,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #DEDBC8;
 }
+
+/* Performance & Rendering Containment */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}

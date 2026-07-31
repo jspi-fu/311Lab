@@ -21,23 +21,33 @@ export const NumberTicker: React.FC<NumberTickerProps> = ({
   useEffect(() => {
     if (!isInView) return;
 
-    let start = 0;
-    const end = value;
-    const totalSteps = 60;
-    const stepTime = (duration * 1000) / totalSteps;
-    const increment = (end - start) / totalSteps;
+    let animationFrameId: number;
+    let startTime: number | null = null;
+    const durationMs = duration * 1000;
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setDisplayValue(end);
-        clearInterval(timer);
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / durationMs, 1);
+      // Ease out cubic for silky smooth animation
+      const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+      const currentValue = Math.floor(easeOutProgress * value);
+
+      setDisplayValue(currentValue);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(step);
       } else {
-        setDisplayValue(Math.floor(start));
+        setDisplayValue(value);
       }
-    }, stepTime);
+    };
 
-    return () => clearInterval(timer);
+    animationFrameId = requestAnimationFrame(step);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [isInView, value, duration]);
 
   return (

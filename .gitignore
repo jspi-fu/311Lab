@@ -45,6 +45,4 @@ dist-ssr/
 .env.production.local
 .env.local
 
-# Large media assets
-public/hero-bg.mp4
 

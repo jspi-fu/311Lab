@@ -21,7 +21,14 @@ export const Navbar: React.FC = () => {
       <div className="pointer-events-auto bg-[#0a0a0c]/90 backdrop-blur-md border border-[#27272a] rounded-b-2xl md:rounded-b-3xl px-4 sm:px-6 md:px-10 py-2.5 md:py-3 shadow-2xl flex items-center justify-between gap-4 md:gap-10 transition-colors duration-300">
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <img src="/logo.png" alt="311 LAB Logo" className="h-7 w-auto object-contain group-hover:opacity-90 transition-opacity" />
+          <img
+            src="/logo.png"
+            alt="311 LAB Logo"
+            width="28"
+            height="28"
+            decoding="async"
+            className="h-7 w-auto object-contain group-hover:opacity-90 transition-opacity"
+          />
           <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#E1E0CC] flex items-center gap-1.5">
             青朗先锋 <span className="hidden sm:inline text-xs text-gray-500 font-normal">| 舆情安全实验室</span>
           </span>

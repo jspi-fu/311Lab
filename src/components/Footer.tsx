@@ -9,7 +9,15 @@ export const Footer: React.FC = () => {
         {/* Brand & Location */}
         <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
           <div className="flex items-center gap-2.5">
-            <img src="/logo.png" alt="311 LAB Logo" className="h-7 w-auto object-contain" />
+            <img
+              src="/logo.png"
+              alt="311 LAB Logo"
+              width="28"
+              height="28"
+              loading="lazy"
+              decoding="async"
+              className="h-7 w-auto object-contain"
+            />
             <span className="text-sm font-bold text-[#E1E0CC]">
               网络舆情安全实验室
             </span>

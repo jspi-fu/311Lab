@@ -25,8 +25,10 @@ export const Home: React.FC = () => {
               loop
               muted
               playsInline
+              preload="metadata"
               className="w-full h-full object-cover opacity-30 scale-105 filter saturate-150 contrast-125"
             >
+              <source src="/hero-bg.mp4" type="video/mp4" />
               <source
                 src="https://ik.imagekit.io/a3keouazok/311Lab-hero-bg.mp4"
                 type="video/mp4"
