@@ -11,6 +11,19 @@ import { TerminalRules } from '../components/TerminalRules';
 import { Timeline } from '../components/Timeline';
 
 export const Home: React.FC = () => {
+  const [isVideoReady, setIsVideoReady] = React.useState(false);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    if (videoRef.current && videoRef.current.readyState >= 3) {
+      setIsVideoReady(true);
+    }
+  }, []);
+
+  const handleVideoReady = () => {
+    setIsVideoReady(true);
+  };
+
   return (
     <div className="w-full bg-[#0a0a0c] text-[#E1E0CC]">
       {/* SECTION 1: HERO */}
@@ -20,13 +33,29 @@ export const Home: React.FC = () => {
           
           {/* Background Canvas: Dark Visual Background */}
           <div className="absolute inset-0 z-0 overflow-hidden">
+            {/* Fallback Screenshot poster - loaded immediately for fast rendering */}
+            <img
+              src="/hero-bg-poster.jpg"
+              alt="Hero Background Poster"
+              className={`absolute inset-0 w-full h-full object-cover scale-105 filter saturate-150 contrast-110 brightness-110 transition-opacity duration-700 ${
+                isVideoReady ? 'opacity-0 pointer-events-none' : 'opacity-55'
+              }`}
+            />
+            {/* Background Video - replaced when video finished parsing */}
             <video
+              ref={videoRef}
               autoPlay
               loop
               muted
               playsInline
-              preload="metadata"
-              className="w-full h-full object-cover opacity-30 scale-105 filter saturate-150 contrast-125"
+              preload="auto"
+              poster="/hero-bg-poster.jpg"
+              onLoadedData={handleVideoReady}
+              onCanPlay={handleVideoReady}
+              onPlaying={handleVideoReady}
+              className={`w-full h-full object-cover scale-105 filter saturate-150 contrast-110 brightness-110 transition-opacity duration-700 ${
+                isVideoReady ? 'opacity-55' : 'opacity-0'
+              }`}
             >
               <source src="/hero-bg.mp4" type="video/mp4" />
               <source
@@ -34,10 +63,8 @@ export const Home: React.FC = () => {
                 type="video/mp4"
               />
             </video>
-            {/* SVG Noise Overlay */}
-            <div className="absolute inset-0 noise-overlay opacity-[0.6] mix-blend-overlay pointer-events-none" />
-            {/* Dark Gradient Layers */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-[#0a0a0c]/50 to-[#0a0a0c]/80 pointer-events-none" />
+            {/* Dark Gradient Layers (Softened for higher brightness) */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-[#0a0a0c]/40 to-[#0a0a0c]/40 pointer-events-none" />
           </div>
 
           {/* Top Inset Badge */}

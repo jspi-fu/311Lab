@@ -44,10 +44,10 @@ export const Timeline: React.FC = () => {
 
   return (
     <div className="w-full relative py-6">
-      {/* Central Line for timeline (Desktop) */}
-      <div className="hidden md:block absolute left-1/2 top-10 bottom-10 w-[2px] bg-gradient-to-b from-[#DEDBC8]/40 via-[#27272a] to-transparent -translate-x-1/2" />
+      {/* Responsive Guide Line: Left-aligned on Mobile (left-5), Centered on Desktop (left-1/2) */}
+      <div className="absolute left-5 md:left-1/2 top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#DEDBC8]/60 via-[#27272a] to-[#27272a]/20 -translate-x-1/2 pointer-events-none" />
 
-      <div className="space-y-10 relative">
+      <div className="space-y-8 md:space-y-12 relative">
         {nodes.map((node, index) => {
           const isEven = index % 2 === 0;
           return (
@@ -57,15 +57,15 @@ export const Timeline: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className={`flex flex-col md:flex-row items-center ${
+              className={`relative flex flex-col md:flex-row items-start md:items-center ${
                 isEven ? 'md:flex-row-reverse' : ''
               }`}
             >
               {/* Content Card Side */}
-              <div className="w-full md:w-1/2 px-0 md:px-8">
-                <div className="bg-[#101010] p-6 rounded-2xl border border-[#27272a] hover:border-[#DEDBC8]/40 transition-colors shadow-xl relative group">
+              <div className="w-full md:w-1/2 pl-12 pr-0 md:px-8">
+                <div className="bg-[#101010] p-5 sm:p-6 rounded-2xl border border-[#27272a] hover:border-[#DEDBC8]/40 transition-colors shadow-xl relative group">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-3xl font-extrabold text-[#DEDBC8] font-mono tracking-tight">
+                    <span className="text-2xl sm:text-3xl font-extrabold text-[#DEDBC8] font-mono tracking-tight">
                       {node.year}
                     </span>
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#DEDBC8]/10 text-[#DEDBC8] border border-[#DEDBC8]/30">
@@ -83,12 +83,12 @@ export const Timeline: React.FC = () => {
                 </div>
               </div>
 
-              {/* Center Dot Icon */}
-              <div className="my-4 md:my-0 z-10 w-10 h-10 rounded-full bg-[#18181b] border-2 border-[#DEDBC8] flex items-center justify-center text-[#DEDBC8] shadow-lg shrink-0">
+              {/* Milestone Icon Dot (Mobile: absolute left-5; Desktop: static centered) */}
+              <div className="absolute left-5 md:relative md:left-auto transform -translate-x-1/2 md:translate-x-0 top-6 md:top-auto z-10 w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#18181b] border-2 border-[#DEDBC8] flex items-center justify-center text-[#DEDBC8] shadow-lg shrink-0">
                 <Milestone className="w-4 h-4" />
               </div>
 
-              {/* Empty Spacer Side */}
+              {/* Empty Spacer Side for Desktop alternating layout */}
               <div className="hidden md:block w-1/2" />
             </motion.div>
           );
